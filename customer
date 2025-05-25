@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Support - TechSupportPro</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #2c3e50;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    input[type="submit"] {
+      background-color: #0070d2;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #005bb5;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Contact Support</h2>
+    <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL000003Nt25" method="POST">
+      <input type="hidden" name="orgid" value="00DgL000003Nt25">
+      <input type="hidden" name="retURL" value="http://">
+
+      <!-- Optional Debugging -->
+      <!-- <input type="hidden" name="debug" value=1> -->
+      <!-- <input type="hidden" name="debugEmail" value="varnij51@gmail.com"> -->
+
+      <label for="00NgL00000yatQ2">Customer Name</label>
+      <input id="00NgL00000yatQ2" name="00NgL00000yatQ2" type="text" maxlength="50" required>
+
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" maxlength="80" required>
+
+      <label for="phone">Phone</label>
+      <input id="phone" name="phone" type="text" maxlength="40">
+
+      <label for="subject">Subject</label>
+      <input id="subject" name="subject" type="text" maxlength="80" required>
+
+      <label for="description">Description</label>
+      <textarea name="description" rows="4" required></textarea>
+
+      <label for="00NgL00000yb1x3">Booking Number</label>
+      <input id="00NgL00000yb1x3" name="00NgL00000yb1x3" type="text" maxlength="20">
+
+      <input type="submit" value="Submit Case">
+    </form>
+    <div class="footer">Powered by Salesforce Web-to-Case</div>
+  </div>
+</body>
+</html>
