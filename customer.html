@@ -107,6 +107,14 @@
 <div class="footer">
   Powered by Salesforce Web-to-Case
 </div>
+  <script>
+  const params = new URLSearchParams(window.location.search);
+  const bookingNumber = params.get("booking");
+  if (bookingNumber) {
+    document.getElementById("00NgL00000yb1x3").value = bookingNumber;
+  }
+</script>
+
 
 </body>
 </html>
