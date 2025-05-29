@@ -3,33 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>Customer Complaint Form</title>
+  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f4f4;
+      background: linear-gradient(135deg, #ffe3b3, #f7b6b6);
       margin: 0;
       padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 1.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     .container {
-      width: 500px;
-      margin: 50px auto;
-      background: white;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #fff;
+      padding: 35px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+      animation: slideUp 1s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     h2 {
       text-align: center;
-      color: #333;
+      margin-bottom: 20px;
+      color: #2c3e50;
     }
 
     label {
       display: block;
       margin-top: 15px;
+      margin-bottom: 5px;
       font-weight: bold;
-      color: #555;
+      color: #444;
     }
 
     input[type="text"],
@@ -38,10 +62,15 @@
     textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
       border: 1px solid #ccc;
-      font-size: 14px;
+      border-radius: 6px;
+      font-size: 15px;
+      transition: border 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #e67e22;
+      outline: none;
     }
 
     textarea {
@@ -50,25 +79,27 @@
     }
 
     input[type="submit"] {
-      background-color: #2e86de;
+      background-color: #e67e22;
       color: white;
-      padding: 12px;
+      padding: 14px;
       border: none;
-      margin-top: 20px;
+      margin-top: 25px;
       width: 100%;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 16px;
       cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     input[type="submit"]:hover {
-      background-color: #1e6fd9;
+      background-color: #d35400;
+      transform: scale(1.02);
     }
 
     .footer {
       text-align: center;
       font-size: 12px;
-      color: #aaa;
+      color: #777;
       margin-top: 20px;
     }
   </style>
@@ -76,20 +107,29 @@
 <body>
 
 <div class="container">
-  <h2>Feedback Form</h2>
+  <h2>Customer Complaint Form</h2>
 
-  <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL000003Nt25" method="POST">
-    <input type="hidden" name="orgid" value="00DgL000003Nt25">
-    <input type="hidden" name="retURL" value="http://">
+  <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DgL000004CcMz" method="POST">
+    <input type="hidden" name="orgid" value="00DgL000004CcMz">
+    <input type="hidden" name="retURL" value="https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjsw4vek8iNAxUSyDgGHb9sAM0QPAgI">
 
-    <label for="00NgL00000yatQ2">Customer Name</label>
-    <input id="00NgL00000yatQ2" maxlength="50" name="00NgL00000yatQ2" type="text" />
+    <!-- Optional debugging fields -->
+    <!--
+    <input type="hidden" name="debug" value=1>
+    <input type="hidden" name="debugEmail" value="varnikaj500@gmail.com">
+    -->
+
+    <label for="00NgL00000z47as">Booking Number</label>
+    <input id="00NgL00000z47as" maxlength="100" name="00NgL00000z47as" type="text" />
+
+    <label for="00NgL00000z46aF">Customer Name</label>
+    <input id="00NgL00000z46aF" maxlength="100" name="00NgL00000z46aF" type="text" />
 
     <label for="email">Email</label>
-    <input id="email" maxlength="80" name="email" type="email" />
+    <input id="email" maxlength="80" name="email" type="text" />
 
     <label for="phone">Phone</label>
-    <input id="phone" maxlength="40" name="phone" type="tel" />
+    <input id="phone" maxlength="40" name="phone" type="text" />
 
     <label for="subject">Subject</label>
     <input id="subject" maxlength="80" name="subject" type="text" />
@@ -97,24 +137,18 @@
     <label for="description">Description</label>
     <textarea id="description" name="description"></textarea>
 
-    <label for="00NgL00000yb1x3">Booking Number</label>
-    <input id="00NgL00000yb1x3" maxlength="20" name="00NgL00000yb1x3" type="text" />
-
     <input type="submit" name="submit" value="Submit Complaint">
   </form>
 </div>
 
-<div class="footer">
-  Powered by Salesforce Web-to-Case
-</div>
-  <script>
+<script>
+  // Auto-fill Booking Number from URL parameter
   const params = new URLSearchParams(window.location.search);
   const bookingNumber = params.get("booking");
   if (bookingNumber) {
-    document.getElementById("00NgL00000yb1x3").value = bookingNumber;
+    document.getElementById("00NgL00000z47as").value = bookingNumber;
   }
 </script>
-
 
 </body>
 </html>
